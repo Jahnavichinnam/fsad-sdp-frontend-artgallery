@@ -6,11 +6,7 @@ export default function AdminNavBar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // ❌ remove auth data
-    localStorage.removeItem("token");
-    localStorage.removeItem("role");
-
-    // 👉 redirect to login
+    localStorage.clear();
     navigate("/login");
   };
 
@@ -25,8 +21,7 @@ export default function AdminNavBar() {
         <Link to="/admin/view-curators">Curators</Link>
         <Link to="/admin/view-artworks">Artworks</Link>
 
-        {/* 🔥 Logout Button */}
-        <button className="logout-btn" onClick={handleLogout}>
+        <button onClick={handleLogout} className="logout-btn">
           Logout
         </button>
       </div>

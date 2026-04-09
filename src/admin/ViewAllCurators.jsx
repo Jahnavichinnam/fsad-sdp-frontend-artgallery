@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import API from "../services/api";
 import AdminNavBar from "./AdminNavBar";
 
-function ViewAllCurators() {
+export default function ViewAllCurators() {
   const [curators, setCurators] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadCurators();
@@ -11,25 +13,62 @@ function ViewAllCurators() {
 
   const loadCurators = async () => {
     try {
-      const res = await API.get("/admin/curators");
-      setCurators(res.data);
+      setLoading(true);
+
+      const res = await API.get("/admin/viewCurators");
+
+      console.log("API RESPONSE:", res.data); // DEBUG
+
+      // ✅ IMPORTANT FIX
+      if (Array.isArray(res.data)) {
+        setCurators(res.data);
+      } else {
+        setCurators([]);
+      }
+
+      setError("");
     } catch (err) {
       console.error(err);
+      setError("Failed to fetch curators");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div>
       <AdminNavBar />
-      <h2>Curators</h2>
 
-      {curators.map((c) => (
-        <div key={c.id}>
-          {c.name} - {c.email}
+      <h2 style={{ textAlign: "center" }}>View All Curators</h2>
+
+      {loading && <p style={{ textAlign: "center" }}>Loading...</p>}
+
+      {error && <p style={{ textAlign: "center", color: "red" }}>{error}</p>}
+
+      {!loading && curators.length === 0 && (
+        <p style={{ textAlign: "center" }}>No curators found.</p>
+      )}
+
+      {!loading && curators.length > 0 && (
+        <div style={{ padding: "20px" }}>
+          {curators.map((c) => (
+            <div
+              key={c.id}
+              style={{
+                border: "1px solid #ccc",
+                margin: "10px",
+                padding: "10px",
+                borderRadius: "6px",
+              }}
+            >
+              <p><b>ID:</b> {c.id}</p>
+              <p><b>Name:</b> {c.name}</p>
+              <p><b>Email:</b> {c.email}</p>
+              <p><b>Role:</b> {c.role}</p>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 }
-
-export default ViewAllCurators;
