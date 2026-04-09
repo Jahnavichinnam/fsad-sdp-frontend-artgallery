@@ -13,6 +13,7 @@ export default function ViewAllCurators() {
 
   const loadCurators = async () => {
     try {
+<<<<<<< HEAD
       setLoading(true);
 
       const res = await API.get("/admin/viewCurators");
@@ -27,6 +28,10 @@ export default function ViewAllCurators() {
       }
 
       setError("");
+=======
+      const res = await API.get("/admin/viewCurators");
+      setCurators(res.data);
+>>>>>>> 25659c17c7cee8c4c4de9fae7be13619fb0b2a12
     } catch (err) {
       console.error(err);
       setError("Failed to fetch curators");

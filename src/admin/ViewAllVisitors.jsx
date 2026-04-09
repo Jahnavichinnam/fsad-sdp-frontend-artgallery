@@ -11,7 +11,7 @@ function ViewAllVisitors() {
 
   const loadVisitors = async () => {
     try {
-      const res = await API.get("/admin/visitors");
+      const res = await API.get("/admin/viewVisitors");
       setVisitors(res.data);
     } catch (err) {
       console.error(err);
