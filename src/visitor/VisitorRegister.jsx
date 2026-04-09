@@ -9,6 +9,8 @@ function VisitorRegister() {
     name: "",
     email: "",
     password: "",
+    contact: "", 
+    city: "",    
   });
 
   const handleChange = (e) => {
@@ -40,6 +42,8 @@ function VisitorRegister() {
       <input name="name" placeholder="Name" onChange={handleChange} /><br /><br />
       <input name="email" placeholder="Email" onChange={handleChange} /><br /><br />
       <input type="password" name="password" placeholder="Password" onChange={handleChange} /><br /><br />
+      <input name="contact" placeholder="Contact Number" onChange={handleChange} /><br /><br /> {/* NEW */}
+      <input name="city" placeholder="City" onChange={handleChange} /><br /><br /> {/* NEW */}
 
       <button onClick={handleRegister}>Register</button>
     </div>

@@ -6,15 +6,7 @@ export default function AdminNavBar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-<<<<<<< HEAD
     localStorage.clear();
-=======
-    
-    localStorage.removeItem("token");
-    localStorage.removeItem("role");
-
-    // 👉 redirect to login
->>>>>>> 25659c17c7cee8c4c4de9fae7be13619fb0b2a12
     navigate("/login");
   };
 
