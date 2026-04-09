@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../services/api"; 
 
 function Login() {
   const navigate = useNavigate();
@@ -7,7 +8,7 @@ function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    role: "ADMIN", // default
+    role: "ADMIN",
   });
 
   const handleChange = (e) => {
@@ -17,30 +18,47 @@ function Login() {
     });
   };
 
-  const handleLogin = () => {
+  // 🔥 UPDATED LOGIN FUNCTION
+  const handleLogin = async () => {
     const { email, password, role } = formData;
 
-    // 🔴 Basic validation
     if (!email || !password) {
       alert("Please enter all fields");
       return;
     }
 
-    // ✅ ROLE BASED NAVIGATION
-    if (role === "ADMIN") {
-      navigate("/admin");
-    } 
-    else if (role === "ARTIST") {
-      navigate("/artist-dashboard");
-    } 
-    else if (role === "CURATOR") {
-      navigate("/curator-dashboard");
-    } 
-    else if (role === "VISITOR") {
-      navigate("/visitor-dashboard");
-    } 
-    else {
-      alert("Invalid role selected");
+    try {
+      
+      const res = await API.post("/auth/login", {
+        login: email,     // backend expects "login"
+        password: password
+      });
+
+      // ✅ STORE TOKEN
+      localStorage.setItem("token", res.data.token);
+
+      // ✅ OPTIONAL: store user
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      alert("Login Successful");
+
+      // ✅ ROLE BASED NAVIGATION
+      if (role === "ADMIN") {
+        navigate("/admin");
+      } 
+      else if (role === "ARTIST") {
+        navigate("/artist-dashboard");
+      } 
+      else if (role === "CURATOR") {
+        navigate("/curator-dashboard");
+      } 
+      else if (role === "VISITOR") {
+        navigate("/visitor-dashboard");
+      }
+
+    } catch (err) {
+      console.error(err);
+      alert("Invalid credentials ❌");
     }
   };
 
@@ -65,7 +83,6 @@ function Login() {
       />
       <br /><br />
 
-      {/* ✅ IMPORTANT FIX */}
       <select
         name="role"
         value={formData.role}
@@ -83,7 +100,6 @@ function Login() {
 
       <br /><br />
 
-      {/* Register Buttons */}
       <button onClick={() => navigate("/visitor-register")}>
         Visitor Register
       </button>
