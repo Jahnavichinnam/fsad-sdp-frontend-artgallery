@@ -6,7 +6,7 @@ export default function AdminNavBar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // ❌ remove auth data
+    
     localStorage.removeItem("token");
     localStorage.removeItem("role");
 

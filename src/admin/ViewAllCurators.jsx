@@ -11,7 +11,7 @@ function ViewAllCurators() {
 
   const loadCurators = async () => {
     try {
-      const res = await API.get("/admin/curators");
+      const res = await API.get("/admin/viewCurators");
       setCurators(res.data);
     } catch (err) {
       console.error(err);

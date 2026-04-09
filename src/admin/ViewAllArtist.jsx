@@ -11,7 +11,7 @@ function ViewAllArtist() {
 
   const loadArtists = async () => {
     try {
-      const res = await API.get("/admin/artists");
+      const res = await API.get("/admin/viewArtists");
       setArtists(res.data);
     } catch (err) {
       console.error(err);
