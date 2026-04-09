@@ -17,6 +17,7 @@ export default function ArtistNavBar() {
 
       <div className="artist-links">
         <Link to="/artist-dashboard">Dashboard</Link>
+        <Link to="/artist/profile">My Profile</Link>
         <Link to="/artist/upload">Upload Artwork</Link>
         <Link to="/artist/my-artworks">My Artworks</Link>
         <Link to="/artist/edit-artwork">Edit Artwork</Link>

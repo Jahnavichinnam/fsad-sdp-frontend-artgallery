@@ -17,7 +17,7 @@ import UploadArtwork from "./artist/UploadArtwork";
 import MyArtworks from "./artist/MyArtworks";
 import EditArtwork from "./artist/EditArtwork";
 import DeleteArtwork from "./artist/DeleteArtwork";
-
+import ArtistProfile from "./artist/ArtistProfile";
 // Curator
 import CuratorDashboard from "./curator/CuratorDashboard";
 import CreateExhibition from "./curator/CreateExhibition";
@@ -68,6 +68,7 @@ function Layout() {
         <Route path="/artist/my-artworks" element={<MyArtworks />} />
         <Route path="/artist/edit-artwork" element={<EditArtwork />} />
         <Route path="/artist/delete-artwork" element={<DeleteArtwork />} />
+        <Route path="/artist/profile" element={<ArtistProfile />} />
 
         {/* Curator */}
         <Route path="/curator-dashboard" element={<CuratorDashboard />} />
