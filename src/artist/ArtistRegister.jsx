@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../services/api";
+import "../pages/Register.css";
 
 function ArtistRegister() {
   const navigate = useNavigate();
@@ -24,29 +26,31 @@ function ArtistRegister() {
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h2>Artist Registration</h2>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>Artist Registration</h2>
 
-      <input
-        name="name"
-        placeholder="Enter Name"
-        onChange={handleChange}
-      /><br /><br />
+        <input
+          name="name"
+          placeholder="Enter Name"
+          onChange={handleChange}
+        />
 
-      <input
-        name="email"
-        placeholder="Enter Email"
-        onChange={handleChange}
-      /><br /><br />
+        <input
+          name="email"
+          placeholder="Enter Email"
+          onChange={handleChange}
+        />
 
-      <input
-        name="password"
-        type="password"
-        placeholder="Enter Password"
-        onChange={handleChange}
-      /><br /><br />
+        <input
+          name="password"
+          type="password"
+          placeholder="Enter Password"
+          onChange={handleChange}
+        />
 
-      <button onClick={handleRegister}>Register</button>
+        <button className="auth-btn" onClick={handleRegister}>Register</button>
+      </div>
     </div>
   );
 }

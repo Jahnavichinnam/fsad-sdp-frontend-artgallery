@@ -66,9 +66,9 @@ function Layout() {
         <Route path="/artist-dashboard" element={<ArtistDashboard />} />
         <Route path="/artist/upload" element={<UploadArtwork />} />
         <Route path="/artist/my-artworks" element={<MyArtworks />} />
+        <Route path="/artist/profile" element={<ArtistProfile />} />
         <Route path="/artist/edit-artwork" element={<EditArtwork />} />
         <Route path="/artist/delete-artwork" element={<DeleteArtwork />} />
-        <Route path="/artist/profile" element={<ArtistProfile />} />
 
         {/* Curator */}
         <Route path="/curator-dashboard" element={<CuratorDashboard />} />

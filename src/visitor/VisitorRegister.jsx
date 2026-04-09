@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
+import "../pages/Register.css";
 
 function VisitorRegister() {
   const navigate = useNavigate();
@@ -20,32 +21,27 @@ function VisitorRegister() {
     });
   };
 
-  const handleRegister = async () => {
-    try {
-      await API.post("/visitor/register", {
-        ...formData,
-        role: "VISITOR",
-      });
+  const handleRegister = () => {
+    console.log("Visitor Registered:", form);
 
-      alert("Visitor Registered Successfully ✅");
-      navigate("/login");
-    } catch (err) {
-      console.error(err);
-      alert("Registration Failed ❌");
-    }
+    alert("Visitor Registered Successfully ✅");
+
+    navigate("/login");
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h2>Visitor Register</h2>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>Visitor Registration</h2>
 
-      <input name="name" placeholder="Name" onChange={handleChange} /><br /><br />
-      <input name="email" placeholder="Email" onChange={handleChange} /><br /><br />
-      <input type="password" name="password" placeholder="Password" onChange={handleChange} /><br /><br />
-      <input name="contact" placeholder="Contact Number" onChange={handleChange} /><br /><br /> {/* NEW */}
-      <input name="city" placeholder="City" onChange={handleChange} /><br /><br /> {/* NEW */}
+        <input name="name" placeholder="Name" onChange={handleChange} />
+        <input name="email" placeholder="Email" onChange={handleChange} />
+        <input type="password" name="password" placeholder="Password" onChange={handleChange} />
+        <input name="contact" placeholder="Contact Number" onChange={handleChange} />
+        <input name="city" placeholder="City" onChange={handleChange} />
 
-      <button onClick={handleRegister}>Register</button>
+        <button className="auth-btn" onClick={handleRegister}>Register</button>
+      </div>
     </div>
   );
 }

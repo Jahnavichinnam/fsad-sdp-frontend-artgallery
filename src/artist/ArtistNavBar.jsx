@@ -20,8 +20,6 @@ export default function ArtistNavBar() {
         <Link to="/artist/profile">My Profile</Link>
         <Link to="/artist/upload">Upload Artwork</Link>
         <Link to="/artist/my-artworks">My Artworks</Link>
-        <Link to="/artist/edit-artwork">Edit Artwork</Link>
-        <Link to="/artist/delete-artwork">Delete Artwork</Link>
 
         <button className="logout-btn" onClick={handleLogout}>
           Logout

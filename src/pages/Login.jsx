@@ -32,11 +32,13 @@ function Login() {
       
       const res = await API.post("/auth/login", {
         login: email,     // backend expects "login"
-        password: password
+        password: password,
+        role: role
       });
 
       // ✅ STORE TOKEN
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("role", role);
 
       // ✅ OPTIONAL: store user
       localStorage.setItem("user", JSON.stringify(res.data.user));
@@ -64,54 +66,38 @@ function Login() {
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h2>Login</h2>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>Login</h2>
 
-      <input
-        name="email"
-        placeholder="Enter Email"
-        value={formData.email}
-        onChange={handleChange}
-      />
-      <br /><br />
+        <input
+          name="email"
+          placeholder="Enter Email"
+          value={formData.email}
+          onChange={handleChange}
+        />
 
-      <input
-        name="password"
-        type="password"
-        placeholder="Enter Password"
-        value={formData.password}
-        onChange={handleChange}
-      />
-      <br /><br />
+        <input
+          name="password"
+          type="password"
+          placeholder="Enter Password"
+          value={formData.password}
+          onChange={handleChange}
+        />
 
-      <select
-        name="role"
-        value={formData.role}
-        onChange={handleChange}
-      >
-        <option value="ADMIN">ADMIN</option>
-        <option value="ARTIST">ARTIST</option>
-        <option value="CURATOR">CURATOR</option>
-        <option value="VISITOR">VISITOR</option>
-      </select>
+        <select
+          name="role"
+          value={formData.role}
+          onChange={handleChange}
+        >
+          <option value="ADMIN">ADMIN</option>
+          <option value="ARTIST">ARTIST</option>
+          <option value="CURATOR">CURATOR</option>
+          <option value="VISITOR">VISITOR</option>
+        </select>
 
-      <br /><br />
-
-      <button onClick={handleLogin}>Login</button>
-
-      <br /><br />
-
-      <button onClick={() => navigate("/visitor-register")}>
-        Visitor Register
-      </button>
-      <br />
-      <button onClick={() => navigate("/artist-register")}>
-        Artist Register
-      </button>
-      <br />
-      <button onClick={() => navigate("/curator-register")}>
-        Curator Register
-      </button>
+        <button className="auth-btn" onClick={handleLogin}>Login</button>
+      </div>
     </div>
   );
 }

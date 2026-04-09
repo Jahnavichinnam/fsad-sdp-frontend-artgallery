@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../services/api";
+import "../pages/Register.css";
 
 function CuratorRegister() {
   const navigate = useNavigate();
@@ -22,14 +24,16 @@ function CuratorRegister() {
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h2>Curator Registration</h2>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>Curator Registration</h2>
 
-      <input name="name" placeholder="Name" onChange={handleChange} /><br /><br />
-      <input name="email" placeholder="Email" onChange={handleChange} /><br /><br />
-      <input name="password" type="password" placeholder="Password" onChange={handleChange} /><br /><br />
+        <input name="name" placeholder="Name" onChange={handleChange} />
+        <input name="email" placeholder="Email" onChange={handleChange} />
+        <input name="password" type="password" placeholder="Password" onChange={handleChange} />
 
-      <button onClick={handleRegister}>Register</button>
+        <button className="auth-btn" onClick={handleRegister}>Register</button>
+      </div>
     </div>
   );
 }

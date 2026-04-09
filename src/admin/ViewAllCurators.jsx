@@ -15,11 +15,10 @@ export default function ViewAllCurators() {
     try {
       setLoading(true);
 
-      const res = await API.get("/admin/viewCurators");
+      const res = await API.get("/admin/viewallcurators");
 
       console.log("API RESPONSE:", res.data); // DEBUG
 
-      // ✅ IMPORTANT FIX
       if (Array.isArray(res.data)) {
         setCurators(res.data);
       } else {
@@ -29,7 +28,18 @@ export default function ViewAllCurators() {
       setError("");
     } catch (err) {
       console.error(err);
-      setError("Failed to fetch curators");
+      const status = err.response?.status;
+      const message =
+        err.response?.data?.message ||
+        err.response?.data ||
+        err.message ||
+        "Failed to fetch curators";
+
+      if (status === 403) {
+        setError("Access denied: only admin users can view curators.");
+      } else {
+        setError(message);
+      }
     } finally {
       setLoading(false);
     }
