@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:2024",
+  baseURL: "https://artgallery-backend-production-f554.up.railway.app",
 });
 
 // Attach token automatically to every request

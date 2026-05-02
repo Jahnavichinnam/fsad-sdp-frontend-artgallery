@@ -54,7 +54,7 @@ export default function MyArtworks() {
         {artworks.map((a) => (
           <div key={a.id} style={cardStyle}>
             {a.imageUrl && (
-              <img src={`http://localhost:2024${a.imageUrl}`} alt={a.title}
+              <img src={`https://artgallery-backend-production-f554.up.railway.app${a.imageUrl}`} alt={a.title}
                 style={{ width: "100%", height: "180px", objectFit: "cover", borderRadius: "6px", marginBottom: "10px" }} />
             )}
             <h3>{a.title}</h3>
