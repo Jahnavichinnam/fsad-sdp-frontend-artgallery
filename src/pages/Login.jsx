@@ -19,7 +19,6 @@ function Login() {
     });
   };
 
-  // 🔥 UPDATED LOGIN FUNCTION
   const handleLogin = async () => {
     const { email, password, role } = formData;
 
@@ -29,35 +28,29 @@ function Login() {
     }
 
     try {
-      
       const res = await API.post("/auth/login", {
-        login: email,     // backend expects "login"
+        login: email,
         password: password,
         role: role
       });
 
-      // ✅ STORE TOKEN
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("role", role);
+      const user = res.data.user;
+      const actualRole = user.role || role;
 
-      // ✅ OPTIONAL: store user
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("role", actualRole);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      if (actualRole === "ARTIST") localStorage.setItem("artistId", user.id);
+      if (actualRole === "VISITOR") localStorage.setItem("visitorId", user.id);
+      if (actualRole === "CURATOR") localStorage.setItem("curatorId", user.id);
 
       alert("Login Successful");
 
-      // ✅ ROLE BASED NAVIGATION
-      if (role === "ADMIN") {
-        navigate("/admin");
-      } 
-      else if (role === "ARTIST") {
-        navigate("/artist-dashboard");
-      } 
-      else if (role === "CURATOR") {
-        navigate("/curator-dashboard");
-      } 
-      else if (role === "VISITOR") {
-        navigate("/visitor-dashboard");
-      }
+      if (actualRole === "ADMIN") navigate("/admin");
+      else if (actualRole === "ARTIST") navigate("/artist-dashboard");
+      else if (actualRole === "CURATOR") navigate("/curator-dashboard");
+      else if (actualRole === "VISITOR") navigate("/visitor-dashboard");
 
     } catch (err) {
       console.error(err);
@@ -72,7 +65,7 @@ function Login() {
 
         <input
           name="email"
-          placeholder="Enter Email"
+          placeholder={formData.role === "ADMIN" ? "Enter Username" : "Enter Email"}
           value={formData.email}
           onChange={handleChange}
         />

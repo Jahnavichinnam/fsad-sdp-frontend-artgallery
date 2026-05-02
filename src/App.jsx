@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import MainNavBar from "./pages/MainNavBar";
 import Login from "./pages/Login";
 
+import ContactUs from "./pages/ContactUs";
+
 // Admin
 import AdminDashboard from "./admin/AdminDashboard";
 import ViewAllVisitors from "./admin/ViewAllVisitors";
@@ -44,7 +46,8 @@ function Layout() {
     location.pathname === "/login" ||
     location.pathname === "/visitor-register" ||
     location.pathname === "/artist-register" ||
-    location.pathname === "/curator-register";
+    location.pathname === "/curator-register" ||
+    location.pathname === "/contact";
 
   return (
     <>
@@ -81,6 +84,8 @@ function Layout() {
         <Route path="/visitor/browse" element={<BrowseArtworks />} />
         <Route path="/visitor/wishlist" element={<WishlistPage />} />
         <Route path="/visitor/cart" element={<CartPage />} />
+
+        <Route path="/contact" element={<ContactUs />} />
 
         {/* Register */}
         <Route path="/visitor-register" element={<VisitorRegister />} />

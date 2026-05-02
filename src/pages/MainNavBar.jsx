@@ -11,6 +11,7 @@ function MainNavBar() {
         <Link to="/visitor-register" className="navbar-link">Visitor Register</Link>
         <Link to="/artist-register" className="navbar-link">Artist Register</Link>
         <Link to="/curator-register" className="navbar-link">Curator Register</Link>
+        <Link to="/contact" className="navbar-link">Contact Us</Link>
       </div>
     </nav>
   );
